@@ -1,0 +1,84 @@
+.featured-sec {
+  margin: 0 0 1rem;
+}
+
+.featured-col {
+  width: 100%;
+  max-width: none;
+}
+
+.promo-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--shd);
+  background-color: var(--crd-bg);
+  backdrop-filter: blur(var(--blur-panel));
+  border: 1px solid var(--crd-bdr);
+  transition: all var(--smooth-duration) var(--smooth-ease);
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.9375rem;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.promo-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.promo-sponsor {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.promo-body {
+  padding: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.promo-image {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.promo-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top;
+}
+
+.promo-content {
+  display: none;
+}
+
+.promo-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background: var(--prim-grd);
+  z-index: 1;
+}

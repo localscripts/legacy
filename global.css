@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap");
+
+:root {
+  --bg: #000000;
+  --fg: #ffffff;
+  --crd-bg: rgba(0, 0, 0, 0.4);
+  --crd-bdr: rgba(255, 255, 255, 0.1);
+  --crd-hvr: rgba(59, 130, 246, 0.2);
+  --prim: #3b82f6;
+  --prim-hvr: #2563eb;
+  --prim-grd: linear-gradient(to right, #3b82f6, #2563eb);
+  --prim-glw: rgba(59, 130, 246, 0.5);
+  --sec: rgba(0, 0, 0, 0.3);
+  --sec-bdr: rgba(255, 255, 255, 0.1);
+  --sec-hvr: rgba(59, 130, 246, 0.1);
+  --sec-hvr-bdr: rgba(59, 130, 246, 0.5);
+  --txt-mut: rgba(156, 163, 175, 1);
+  --theme-color: #3b82f6;
+  --footer-bg: rgba(0, 0, 0, 0.8);
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --footer-text: rgba(209, 213, 219, 1);
+  --footer-muted: rgba(156, 163, 175, 1);
+  --social-hover: #3b82f6;
+  --card-hover: #3b82f6;
+  --ad-color: #3b82f6;
+  --ad2-color: #3b82f6;
+  --ad3-color: linear-gradient(90deg, #3b82f6, #2563eb);
+  --inp-color: #3b82f6;
+  --inp2-color: rgba(59, 130, 246, 0.5);
+  --lbl-color: #3b82f6;
+  --lbl2-color: white;
+  --checkbx-color: rgba(59, 130, 246, 0.1);
+  --checkbx2-color: rgba(59, 130, 246, 0.3);
+  --prim-rgb: 59, 130, 246;
+  --bg-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.6));
+  --warning-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+  --bdg-b-color: rgba(59, 130, 246, 0.1);
+  --bdg-color: rgba(59, 130, 246, 0.3);
+  --srch-dflt: rgb(133, 133, 133);
+  --srch-dflt-dyn: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  --smooth-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --smooth-duration: 0.45s;
+  --blur-overlay: 4px;
+  --blur-panel: 8px;
+  --blur-strong: 10px;
+  --blur-flash-start: 1px;
+  --blur-flash-end: 0.4px;
+  --rad: 0.5rem;
+  --hdr-h: 4rem;
+  --mob-panel-pad: 0.6rem;
+  --mob-quick-gap: 0.55rem;
+  --mob-quick-icon-size: 1.4rem;
+  --mob-quick-icon-font: 1rem;
+  --mob-quick-solid-size: 2.25rem;
+  --mob-quick-solid-radius: 0.5rem;
+  --shd: 0 10px 25px rgba(0, 0, 0, 0.2);
+  --shd-hvr: 0 15px 30px rgba(0, 0, 0, 0.3);
+  --hero-width: 48rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Open Sans", sans-serif;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--prim-rgb), 0.85) #000000;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--prim), var(--prim-hvr));
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--prim-hvr), var(--prim));
+}
+
+*::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.cntr {
+  width: 100%;
+  max-width: clamp(300px, 95vw, 1800px);
+  margin: 0 auto;
+  padding: 0 clamp(0.5rem, 5vw, 2rem);
+}
+
+#navbarMount {
+  display: contents;
+}
+
+
+.infinite-scroll-host {
+  width: 100%;
+}
+
+.infinite-scroll-chunk {
+  min-height: 72vh;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(var(--prim-rgb), 0.02));
+}
+
