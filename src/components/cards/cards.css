@@ -90,8 +90,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  align-items: start;
-  grid-auto-rows: auto;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
 }
 
 .exploit-card-placeholder {
@@ -101,7 +101,7 @@
   background: rgba(0, 0, 0, 0.82);
   overflow: hidden;
   transition: all var(--smooth-duration) var(--smooth-ease);
-  height: auto;
+  height: 100%;
   min-height: 0;
   max-height: none;
   display: flex;
@@ -109,6 +109,7 @@
   padding: 1rem 1rem 0.92rem;
   box-shadow: var(--shd);
   gap: 0.55rem;
+  order: 1;
 }
 
 .exploit-card-placeholder::before {
@@ -125,19 +126,20 @@
 .exploit-card-placeholder::after {
   content: "";
   position: absolute;
-  top: 0.55rem;
-  left: 0.55rem;
-  width: 4.8rem;
-  height: 4.8rem;
+  top: -2.4rem;
+  left: -2.4rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(var(--prim-rgb), 0.34) 0%, rgba(var(--prim-rgb), 0.16) 34%, rgba(var(--prim-rgb), 0) 72%);
-  filter: blur(1.35rem);
-  opacity: 0.95;
+  background: radial-gradient(circle at top left, rgba(var(--prim-rgb), 0.38) 0%, rgba(var(--prim-rgb), 0.2) 28%, rgba(var(--prim-rgb), 0.08) 46%, rgba(var(--prim-rgb), 0) 72%);
+  filter: blur(1.8rem);
+  opacity: 0.9;
 }
 
 .exploit-card-placeholder.is-down {
   border-color: rgba(148, 163, 184, 0.28);
+  order: 2;
 }
 
 .exploit-card-placeholder.is-down::before {
@@ -146,8 +148,8 @@
 }
 
 .exploit-card-placeholder.is-down::after {
-  background: radial-gradient(circle, rgba(148, 163, 184, 0.3) 0%, rgba(148, 163, 184, 0.14) 34%, rgba(148, 163, 184, 0) 72%);
-  opacity: 0.88;
+  background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.34) 0%, rgba(148, 163, 184, 0.18) 28%, rgba(148, 163, 184, 0.07) 46%, rgba(148, 163, 184, 0) 72%);
+  opacity: 0.84;
 }
 
 .ph-head {
@@ -187,7 +189,7 @@
 }
 
 .ph-warn-ico {
-  color: #fb7185 !important;
+  color: #facc15 !important;
 }
 
 .ph-rating {
@@ -216,6 +218,16 @@
 .ph-rating.is-none .ph-rating-val {
   color: rgba(156, 163, 175, 0.6);
   opacity: 0.42;
+}
+
+.exploit-card-placeholder.is-down .ph-rating-logo,
+.exploit-card-placeholder.is-down .ph-rating-val {
+  color: rgba(156, 163, 175, 0.78);
+  opacity: 0.72;
+}
+
+.exploit-card-placeholder.is-down .ph-rating-logo {
+  filter: grayscale(1) brightness(0.9);
 }
 
 .ph-tags {
@@ -308,12 +320,68 @@
   order: 4;
 }
 
-.ph-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.42rem;
+.ph-chips-wrap {
+  position: relative;
   margin-top: 0.16rem;
   order: 5;
+}
+
+.ph-chips {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.42rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-right: 1.8rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ph-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.ph-chips-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.78) 62%, rgba(0, 0, 0, 0.92) 100%);
+  opacity: 0;
+  transition: opacity var(--smooth-duration) var(--smooth-ease);
+  z-index: 1;
+}
+
+.ph-chips-wrap::after {
+  content: "\f054";
+  position: absolute;
+  top: 50%;
+  right: 0.25rem;
+  transform: translateY(-50%) translateX(-0.18rem);
+  pointer-events: none;
+  color: rgba(147, 197, 253, 0.92);
+  font-family: "Font Awesome 6 Free";
+  font-size: 0.66rem;
+  font-weight: 900;
+  opacity: 0;
+  transition:
+    opacity var(--smooth-duration) var(--smooth-ease),
+    transform var(--smooth-duration) var(--smooth-ease);
+  z-index: 2;
+}
+
+.ph-chips-wrap.has-overflow:not(.is-scrolled-end)::before {
+  opacity: 1;
+}
+
+.ph-chips-wrap.has-overflow:not(.is-scrolled-end)::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 
 .ph-chip {
@@ -342,7 +410,7 @@
 }
 
 .ph-info-btn {
-  margin-top: 0.45rem;
+  margin-top: auto;
   height: 2rem;
   border-radius: 0.52rem;
   border: 1px solid rgba(var(--prim-rgb), 0.5);
@@ -366,10 +434,6 @@
 .exploit-card-placeholder.is-down .ph-info-btn {
   border-color: rgba(148, 163, 184, 0.42);
   color: rgba(203, 213, 225, 0.88);
-}
-
-.exploit-card-placeholder.is-down .ph-status-tag {
-  background: rgba(30, 41, 59, 0.82);
 }
 
 @media (max-width: 1024px) {

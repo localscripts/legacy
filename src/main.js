@@ -15,6 +15,44 @@
     mount.innerHTML = await response.text();
   };
 
+  const initCardChipOverflow = (root = document) => {
+    const chipWraps = [...root.querySelectorAll(".ph-chips-wrap")];
+    if (!chipWraps.length) return;
+
+    const syncRowState = (wrap) => {
+      const row = wrap.querySelector(".ph-chips");
+      if (!row) return;
+
+      const hasOverflow = row.scrollWidth - row.clientWidth > 4;
+      const isScrolledEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+
+      wrap.classList.toggle("has-overflow", hasOverflow);
+      wrap.classList.toggle("is-scrolled-end", !hasOverflow || isScrolledEnd);
+    };
+
+    chipWraps.forEach((wrap) => {
+      const row = wrap.querySelector(".ph-chips");
+      if (!row) return;
+
+      syncRowState(wrap);
+
+      if (row.dataset.overflowBound === "true") return;
+
+      row.addEventListener("scroll", () => {
+        syncRowState(wrap);
+      });
+
+      row.dataset.overflowBound = "true";
+    });
+
+    const syncAll = () => {
+      chipWraps.forEach(syncRowState);
+    };
+
+    window.addEventListener("resize", syncAll);
+    requestAnimationFrame(syncAll);
+  };
+
   onReady(async () => {
     try {
       const promoMount = document.getElementById("promoMount");
@@ -43,6 +81,7 @@
       const cardsMount = document.getElementById("cardsMount");
       if (cardsMount) {
         await loadInto(cardsMount, "src/components/cards/cards.html");
+        initCardChipOverflow(cardsMount);
       }
 
       const footerMount = document.getElementById("footerMount");
