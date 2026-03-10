@@ -54,6 +54,26 @@ const initNavbar = () => {
     el.mobMenu.classList.toggle("hide-dup-search", isVisible(el.srchCntr));
   };
 
+  const bindSearchField = (container, input, clearButton) => {
+    if (!container || !input) return;
+
+    const syncState = () => {
+      const hasValue = input.value.length > 0;
+      container.classList.toggle("has-value", hasValue);
+      clearButton?.classList.toggle("hidden", !hasValue);
+    };
+
+    on(input, "input", syncState);
+    on(input, "change", syncState);
+    on(clearButton, "click", () => {
+      input.value = "";
+      syncState();
+      input.focus();
+    });
+
+    syncState();
+  };
+
   const closeMenu = () => {
     setHidden(el.mobMenu, true);
     document.body.style.overflow = "";
@@ -96,6 +116,10 @@ const initNavbar = () => {
     syncDropdownSearchVisibility();
     if (menuOpen()) syncMenuTop();
   };
+
+  bindSearchField(el.srchCntr, el.srchInp, byId("clrSrch"));
+  bindSearchField(qs(".mob-search-panel-field"), el.mobPanelSrchInp, byId("mobPanelClrSrch"));
+  bindSearchField(qs(".mob-srch-cntr"), el.mobSrchInp, byId("mobClrSrch"));
 
   on(el.mobMenuTgl, "click", () => (menuOpen() ? closeMenu() : openMenu()));
   on(el.mobSearchTgl, "click", () => (panelOpen() ? closeMobileSearchPanel() : openMobileSearchPanel()));

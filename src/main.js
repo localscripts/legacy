@@ -15,51 +15,6 @@
     mount.innerHTML = await response.text();
   };
 
-  const initFooterThemeDropdown = () => {
-    const dropdown = document.getElementById("themeDropdown");
-    const selected = document.getElementById("themeDropdownSelected");
-    const optionsRoot = document.getElementById("themeDropdownOptions");
-    if (!dropdown || !selected || !optionsRoot) return;
-
-    const setSelectedOption = (option) => {
-      const optionLabel = option.querySelector("span")?.textContent?.trim() || "Theme";
-      const indicator = option.querySelector(".theme-color-indicator");
-      const indicatorHtml = indicator
-        ? indicator.outerHTML
-        : '<div class="theme-color-indicator blue"></div>';
-
-      selected.innerHTML = `${indicatorHtml}<span>${optionLabel}</span><i class="fas fa-chevron-down"></i>`;
-      optionsRoot
-        .querySelectorAll(".theme-dropdown-option")
-        .forEach((el) => el.classList.remove("selected"));
-      option.classList.add("selected");
-    };
-
-    const defaultBlue = optionsRoot.querySelector('.theme-dropdown-option[data-theme="blue"]');
-    if (defaultBlue) {
-      setSelectedOption(defaultBlue);
-    }
-
-    selected.addEventListener("click", (event) => {
-      event.stopPropagation();
-      dropdown.classList.toggle("active");
-    });
-
-    optionsRoot.querySelectorAll(".theme-dropdown-option").forEach((option) => {
-      option.addEventListener("click", (event) => {
-        event.stopPropagation();
-        setSelectedOption(option);
-        dropdown.classList.remove("active");
-      });
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!dropdown.contains(event.target)) {
-        dropdown.classList.remove("active");
-      }
-    });
-  };
-
   onReady(async () => {
     try {
       const promoMount = document.getElementById("promoMount");
@@ -93,7 +48,7 @@
       const footerMount = document.getElementById("footerMount");
       if (footerMount) {
         await loadInto(footerMount, "src/components/footer/footer.html");
-        initFooterThemeDropdown();
+        window.initDisabledThemeNotice?.(document);
       }
     } catch (error) {
       console.error(error);

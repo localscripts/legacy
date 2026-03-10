@@ -8,16 +8,9 @@
 }
 
 .promo-card {
-  position: relative;
-  width: 100%;
   max-width: 400px;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: var(--shd);
   background-color: var(--crd-bg);
-  backdrop-filter: blur(var(--blur-panel));
   border: 1px solid var(--crd-bdr);
-  transition: all var(--smooth-duration) var(--smooth-ease);
   display: flex;
   flex-direction: column;
 }

@@ -36,15 +36,16 @@
   --warning-bg: linear-gradient(135deg, #3b82f6, #2563eb);
   --bdg-b-color: rgba(59, 130, 246, 0.1);
   --bdg-color: rgba(59, 130, 246, 0.3);
+  --link-muted: rgba(255, 255, 255, 0.8);
   --srch-dflt: rgb(133, 133, 133);
   --srch-dflt-dyn: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   --smooth-ease: cubic-bezier(0.65, 0, 0.35, 1);
   --smooth-duration: 0.45s;
-  --blur-overlay: 4px;
-  --blur-panel: 8px;
-  --blur-strong: 10px;
-  --blur-flash-start: 1px;
-  --blur-flash-end: 0.4px;
+  --blur-overlay: 0px;
+  --blur-panel: 0px;
+  --blur-strong: 0px;
+  --blur-flash-start: 0px;
+  --blur-flash-end: 0px;
   --rad: 0.5rem;
   --hdr-h: 4rem;
   --mob-panel-pad: 0.6rem;
@@ -53,6 +54,10 @@
   --mob-quick-icon-font: 1rem;
   --mob-quick-solid-size: 2.25rem;
   --mob-quick-solid-radius: 0.5rem;
+  --surface-control-bg: rgba(0, 0, 0, 0.5);
+  --surface-control-bg-hover: rgba(0, 0, 0, 0.7);
+  --surface-overlay-bg: rgba(0, 0, 0, 0.95);
+  --prim-glow-shadow: 0 0 0.45rem rgba(var(--prim-rgb), 0.7), 0 0 1rem rgba(var(--prim-rgb), 0.55);
   --shd: 0 10px 25px rgba(0, 0, 0, 0.2);
   --shd-hvr: 0 15px 30px rgba(0, 0, 0, 0.3);
   --hero-width: 48rem;
@@ -102,6 +107,44 @@ a {
   text-decoration: none;
 }
 
+.nav-lnk,
+.footer-nav-link {
+  font-size: 0.875rem;
+  color: var(--link-muted);
+  white-space: nowrap;
+  transition: color var(--smooth-duration) var(--smooth-ease);
+}
+
+.nav-lnk:hover,
+.footer-nav-link:hover {
+  color: var(--fg);
+}
+
+.theme-dropdown-selected,
+.custom-dropdown-selected {
+  background-color: var(--surface-control-bg);
+  border: 1px solid var(--sec-bdr);
+  border-radius: var(--rad);
+  transition: all var(--smooth-duration) var(--smooth-ease);
+}
+
+.theme-dropdown-options,
+.custom-dropdown-options {
+  background-color: var(--surface-overlay-bg);
+  border: 1px solid var(--sec-bdr);
+  border-radius: var(--rad);
+}
+
+.hero-crd,
+.promo-card {
+  position: relative;
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: var(--shd);
+  overflow: hidden;
+  transition: all var(--smooth-duration) var(--smooth-ease);
+}
+
 button {
   cursor: pointer;
   font-family: inherit;
@@ -109,7 +152,8 @@ button {
 
 .cntr {
   width: 100%;
-  max-width: clamp(300px, 95vw, 1800px);
+  max-width: min(100%, clamp(300px, 95vw, 1800px));
+  min-width: 0;
   margin: 0 auto;
   padding: 0 clamp(0.5rem, 5vw, 2rem);
 }
@@ -126,5 +170,106 @@ button {
 .infinite-scroll-chunk {
   min-height: 72vh;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(var(--prim-rgb), 0.02));
+}
+
+.site-toast-stack {
+  position: fixed;
+  right: clamp(0.8rem, 2vw, 1.25rem);
+  bottom: clamp(0.8rem, 2vw, 1.25rem);
+  z-index: 600;
+  display: grid;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.site-toast {
+  position: relative;
+  width: min(24rem, calc(100vw - 1.6rem));
+  padding: 0.9rem 1rem 0.95rem 1rem;
+  border: 1px solid rgba(var(--prim-rgb), 0.3);
+  border-radius: calc(var(--rad) + 0.15rem);
+  background:
+    radial-gradient(circle at top right, rgba(var(--prim-rgb), 0.14), transparent 46%),
+    linear-gradient(180deg, rgba(6, 12, 24, 0.96), rgba(0, 0, 0, 0.92));
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.46),
+    0 0 1.2rem rgba(var(--prim-rgb), 0.18);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity calc(var(--smooth-duration) * 0.7) var(--smooth-ease),
+    transform calc(var(--smooth-duration) * 0.7) var(--smooth-ease);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.site-toast::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--prim-grd);
+}
+
+.site-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-toast.is-leaving {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.site-toast-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.site-toast-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  background: rgba(var(--prim-rgb), 0.16);
+  color: var(--prim);
+  font-size: 0.8rem;
+  flex: 0 0 auto;
+}
+
+.site-toast-title {
+  margin: 0;
+  color: var(--fg);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.site-toast-message {
+  margin: 0;
+  color: rgba(209, 213, 219, 0.92);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  padding-left: 2.3rem;
+}
+
+@media (max-width: 640px) {
+  .site-toast-stack {
+    right: 0.6rem;
+    bottom: 0.6rem;
+    left: 0.6rem;
+  }
+
+  .site-toast {
+    width: 100%;
+  }
+
+  .site-toast-message {
+    padding-left: 0;
+  }
 }
 

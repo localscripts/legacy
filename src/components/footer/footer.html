@@ -5,18 +5,24 @@
           <img src="/assets/header.png" alt="voxlis.NET" class="footer-logo-img">
         </div>
         <div class="footer-nav">
-          <a href="/" class="footer-nav-link">Home</a>
-          <a href="/discord/" class="footer-nav-link">Discord</a>
-          <a href="https://github.com/localscripts/voxlis.NET" class="footer-nav-link">Contribute</a>
+          <a href="/" class="footer-nav-link">Contact</a>
+          <a href="/terms/" class="footer-nav-link">Terms</a>
+          <a href="/privacy/" class="footer-nav-link">Privacy</a>
         </div>
       </div>
       <div class="footer-middle">
         <div class="theme-switcher">
           <div class="theme-switcher-label">Theme</div>
-          <div class="theme-dropdown" id="themeDropdown">
+          <div
+            class="theme-dropdown"
+            id="themeDropdown"
+            data-disabled-title="Themes Disabled"
+            data-disabled-message="Theme switching is disabled for now. Legacy stays locked in."
+            data-disabled-duration="3200"
+          >
             <div class="theme-dropdown-selected" id="themeDropdownSelected">
               <div class="theme-color-indicator blue"></div>
-              <span>Blue Theme</span>
+              <span>Legacy</span>
               <i class="fas fa-chevron-down"></i>
 </div>
             <div class="theme-dropdown-options" id="themeDropdownOptions">
@@ -26,7 +32,7 @@
               </div>
               <div class="theme-dropdown-option selected" data-theme="blue">
                 <div class="theme-color-indicator blue"></div>
-                <span>Blue Theme</span>
+                <span>Legacy</span>
               </div>
               <div class="theme-dropdown-option" data-theme="purple">
                 <div class="theme-color-indicator purple"></div>
@@ -42,26 +48,22 @@
               </div>
             </div>
           </div>
-          <div class="theme-cat" id="themeCat" onclick="window.open('https://www.youtube.com/@voxlis-NET', '_blank')">
-            <img src="/assets/cat.png" alt="Cat" class="cat-image">
-          </div>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-info">
           <div class="copyright">© 2025 voxlis.NET. All rights reserved.</div>
-          <div class="credits">Redesigned with 💙 by <span class="designer-credit">voxlis & Richy</span></div>
+          <div class="credits">Redesigned with &#128153; by <span class="designer-credit">voxlis & Richy</span></div>
         </div>
-        <div class="footer-social">
-          <a href="/discord/" class="social-icon" aria-label="Discord" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-discord"></i>
-          </a>
-          <a href="https://github.com/localscripts/voxlis.NET" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://www.youtube.com/@voxlis-NET/videos" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-youtube"></i>
-          </a>
+        <div class="footer-status" aria-label="API status">
+          <div class="status-item">
+            <span class="status-dot status-dot-live" aria-hidden="true"></span>
+            <span class="status-label">Key-Empire.com API status</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-dot-live" aria-hidden="true"></span>
+            <span class="status-label">voxlis API status</span>
+          </div>
         </div>
       </div>
     </div>

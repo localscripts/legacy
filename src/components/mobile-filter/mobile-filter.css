@@ -16,8 +16,16 @@
 .fltr-drwr-ovl {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(var(--blur-overlay));
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.58) 0%,
+      rgba(0, 0, 0, 0.5) 56%,
+      rgba(0, 0, 0, 0.42) calc(100% - 460px),
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  transition:
+    background var(--smooth-duration) var(--smooth-ease);
 }
 
 .fltr-drwr-cntnt {
@@ -28,12 +36,29 @@
   width: 100%;
   max-width: 400px;
   background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(var(--blur-panel));
   border-left: 1px solid var(--sec-bdr);
   display: flex;
   flex-direction: column;
+  box-shadow: -22px 0 36px rgba(0, 0, 0, 0.22);
   transform: translateX(100%);
   transition: transform var(--smooth-duration) var(--smooth-ease);
+}
+
+.fltr-drwr-cntnt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40px;
+  width: 40px;
+  pointer-events: none;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.4) 38%,
+    rgba(0, 0, 0, 0.14) 72%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .fltr-drwr.open .fltr-drwr-cntnt {
@@ -240,11 +265,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.625rem 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--sec-bdr);
-  border-radius: var(--rad);
   cursor: pointer;
-  transition: all var(--smooth-duration) var(--smooth-ease);
 }
 
 .custom-dropdown-selected:hover {
@@ -263,9 +284,6 @@
   overflow: hidden;
   margin-top: 5px;
   margin-bottom: 0;
-  border: 1px solid var(--sec-bdr);
-  border-radius: var(--rad);
-  background-color: rgba(0, 0, 0, 0.95);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   transition: max-height var(--smooth-duration) var(--smooth-ease), opacity var(--smooth-duration) var(--smooth-ease), visibility var(--smooth-duration) var(--smooth-ease);
 }
@@ -317,7 +335,7 @@
 }
 
 .apply-fltrs-btn:hover {
-  box-shadow: 0 0 0.45rem rgba(var(--prim-rgb), 0.7), 0 0 1rem rgba(var(--prim-rgb), 0.55);
+  box-shadow: var(--prim-glow-shadow);
 }
 
 @media (max-width: 480px) {
