@@ -178,10 +178,31 @@
   overflow: hidden;
 }
 
-.banner-image {
+.banner-stack {
+  position: relative;
+  display: block;
+  width: 100%;
   max-width: 600px;
+}
+
+.banner-base-image {
+  display: block;
   width: 100%;
   height: auto;
+}
+
+.banner-overlay-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--banner-overlay-fill);
+  opacity: var(--banner-overlay-opacity);
+  transition:
+    background var(--smooth-duration) var(--smooth-ease),
+    opacity var(--smooth-duration) var(--smooth-ease);
+  pointer-events: none;
+  -webkit-mask: url("../../../assets/banner/voxlis-banner.png") center / 100% 100% no-repeat;
+  mask: url("../../../assets/banner/voxlis-banner.png") center / 100% 100% no-repeat;
 }
 
 @media (max-width: 1024px) {

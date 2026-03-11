@@ -1,4 +1,4 @@
-﻿.footer-logo-img {
+.footer-logo-base {
   height: 40px;
   width: auto;
   display: block;
@@ -54,6 +54,36 @@
 .footer-logo {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.footer-logo-stack {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.footer-logo-overlay {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--header-overlay-fill);
+  opacity: var(--header-overlay-opacity);
+  pointer-events: none;
+  -webkit-mask: url("../../../assets/header/voxlis-banner.png") center / 100% 100% no-repeat;
+  mask: url("../../../assets/header/voxlis-banner.png") center / 100% 100% no-repeat;
+}
+
+.footer-logo-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .footer-nav {
@@ -111,23 +141,12 @@
   border-color: var(--prim);
 }
 
-.theme-dropdown.theme-dropdown-disabled .theme-dropdown-selected {
-  border-color: rgba(var(--prim-rgb), 0.22);
-  background: linear-gradient(180deg, rgba(8, 12, 22, 0.92), rgba(0, 0, 0, 0.82));
+.theme-dropdown-selected i {
+  transition: transform var(--smooth-duration) var(--smooth-ease);
 }
 
-.theme-dropdown.theme-dropdown-disabled .theme-dropdown-selected:hover {
-  background: linear-gradient(180deg, rgba(8, 12, 22, 0.92), rgba(0, 0, 0, 0.82));
-  border-color: rgba(var(--prim-rgb), 0.22);
-}
-
-.theme-dropdown.theme-dropdown-disabled .theme-dropdown-selected:active {
-  transform: translateY(1px);
-  border-color: rgba(var(--prim-rgb), 0.45);
-}
-
-.theme-dropdown.theme-dropdown-disabled .theme-dropdown-options {
-  display: none !important;
+.theme-dropdown.active .theme-dropdown-selected i {
+  transform: rotate(180deg);
 }
 
 .theme-color-indicator {
@@ -158,13 +177,68 @@
   background-color: #f59e0b;
 }
 
-.heartRainCanvas {
-  z-index: 9999;
+.theme-color-indicator.cyan {
+  background-color: #06b6d4;
 }
 
-.theme-color-indicator.black {
-  background-color: #ffffff;
-  border: 2px solid #333333;
+.theme-color-indicator.teal {
+  background-color: #14b8a6;
+}
+
+.theme-color-indicator.indigo {
+  background-color: #6366f1;
+}
+
+.theme-color-indicator.pink {
+  background-color: #ec4899;
+}
+
+.theme-color-indicator.rose {
+  background-color: #f43f5e;
+}
+
+.theme-color-indicator.amber {
+  background-color: #f59e0b;
+}
+
+.theme-color-indicator.lime {
+  background-color: #84cc16;
+}
+
+.theme-color-indicator.emerald {
+  background-color: #10b981;
+}
+
+.theme-color-indicator.sky {
+  background-color: #0ea5e9;
+}
+
+.theme-color-indicator.violet {
+  background-color: #7c3aed;
+}
+
+.theme-color-indicator.slate {
+  background-color: #64748b;
+}
+
+.theme-color-indicator.gold {
+  background-color: #eab308;
+}
+
+.theme-color-indicator.crimson {
+  background-color: #dc2626;
+}
+
+.theme-color-indicator.aqua {
+  background-color: #22d3ee;
+}
+
+.theme-color-indicator.magenta {
+  background-color: #d946ef;
+}
+
+.heartRainCanvas {
+  z-index: 9999;
 }
 
 .theme-dropdown-options {
@@ -174,7 +248,8 @@
   width: max-content;
   min-width: 100%;
   z-index: 210;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   max-height: 0;
   opacity: 0;
   transition: max-height var(--smooth-duration) var(--smooth-ease), opacity var(--smooth-duration) var(--smooth-ease);
@@ -182,7 +257,7 @@
 }
 
 .theme-dropdown.active .theme-dropdown-options {
-  max-height: 300px;
+  max-height: min(24rem, 68vh);
   opacity: 1;
 }
 
@@ -222,6 +297,29 @@
 .theme-credit {
   font-size: 0.75rem;
   color: var(--footer-muted);
+}
+
+.credits {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  flex-wrap: wrap;
+}
+
+.footer-heart {
+  width: 0.78rem;
+  height: 0.78rem;
+  display: inline-block;
+  flex: 0 0 auto;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--prim-rgb), 0.5) 0%,
+    rgba(var(--prim-rgb), 0.72) 34%,
+    var(--prim) 100%
+  );
+  opacity: var(--header-overlay-opacity);
+  -webkit-mask: url("../../../assets/ads/heart.svg") center / contain no-repeat;
+  mask: url("../../../assets/ads/heart.svg") center / contain no-repeat;
 }
 
 .designer-credit {
@@ -308,7 +406,9 @@
     height: 40px;
   }
 
-  .footer-logo-img {
+  .footer-logo-base {
     height: 32px;
   }
 }
+
+

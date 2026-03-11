@@ -56,3 +56,12 @@
     padding: 0.65rem 1.375rem;
   }
 }
+
+.main-lyt.ads-hidden {
+  grid-template-columns: 1fr;
+}
+
+.main-lyt.ads-hidden .layout-left,
+.main-lyt.ads-hidden .layout-right {
+  display: none;
+}

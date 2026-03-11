@@ -87,7 +87,7 @@
       const footerMount = document.getElementById("footerMount");
       if (footerMount) {
         await loadInto(footerMount, "src/components/footer/footer.html");
-        window.initDisabledThemeNotice?.(document);
+        window.initThemeSwitcher?.(document);
       }
     } catch (error) {
       console.error(error);

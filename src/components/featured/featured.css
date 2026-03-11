@@ -13,6 +13,7 @@
   border: 1px solid var(--crd-bdr);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .promo-header {
@@ -34,8 +35,22 @@
 }
 
 .promo-sponsor {
+  padding: 0;
+  border: none;
+  background: transparent;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: color var(--smooth-duration) var(--smooth-ease);
+}
+
+.promo-sponsor:hover {
+  color: var(--fg);
+}
+
+.promo-sponsor:focus-visible {
+  outline: none;
+  color: var(--fg);
 }
 
 .promo-body {
@@ -53,12 +68,39 @@
   position: relative;
 }
 
-.promo-image img {
+.featured-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.featured-bg-image {
   display: block;
   width: 100%;
   height: auto;
   object-fit: contain;
   object-position: top;
+}
+
+.featured-net-image,
+.featured-overlay-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.featured-overlay-image {
+  background: var(--featured-overlay-fill);
+  opacity: var(--featured-overlay-opacity);
+  transition:
+    background var(--smooth-duration) var(--smooth-ease),
+    opacity var(--smooth-duration) var(--smooth-ease);
+  -webkit-mask: url("../../../assets/featured/overlay-voxlis.png") center / 100% 100% no-repeat;
+  mask: url("../../../assets/featured/overlay-voxlis.png") center / 100% 100% no-repeat;
 }
 
 .promo-content {

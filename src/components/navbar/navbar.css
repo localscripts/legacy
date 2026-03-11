@@ -5,6 +5,7 @@
   background-color: #000;
   border-bottom: 1px solid transparent;
   overflow: visible;
+  isolation: isolate;
   padding: 5px 0;
   transition: padding var(--smooth-duration) var(--smooth-ease);
 }
@@ -14,7 +15,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
+  bottom: 0;
   height: 1px;
   opacity: 0;
   pointer-events: none;
@@ -77,11 +78,45 @@
   z-index: 1;
 }
 
-.logo-img {
+.logo-stack {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.logo-base-image {
   display: block;
   width: auto;
   height: 2.7rem;
   transition: height var(--smooth-duration) var(--smooth-ease), max-width var(--smooth-duration) var(--smooth-ease);
+}
+
+.logo-overlay-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--header-overlay-fill);
+  opacity: var(--header-overlay-opacity);
+  transition:
+    background var(--smooth-duration) var(--smooth-ease),
+    opacity var(--smooth-duration) var(--smooth-ease),
+    height var(--smooth-duration) var(--smooth-ease),
+    max-width var(--smooth-duration) var(--smooth-ease);
+  pointer-events: none;
+  -webkit-mask: url("../../../assets/header/voxlis-banner.png") center / 100% 100% no-repeat;
+  mask: url("../../../assets/header/voxlis-banner.png") center / 100% 100% no-repeat;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .srch-cntr {
@@ -578,7 +613,7 @@
     margin: 0;
   }
 
-  .logo-img {
+  .logo-base-image {
     height: 2.28rem;
   }
 }
@@ -665,7 +700,7 @@
     max-width: 44vw;
   }
 
-  .logo-img {
+  .logo-base-image {
     height: 1.72rem;
     max-width: 100%;
   }

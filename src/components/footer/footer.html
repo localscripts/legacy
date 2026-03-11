@@ -2,7 +2,11 @@
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-logo">
-          <img src="/assets/header.png" alt="voxlis.NET" class="footer-logo-img">
+          <span class="footer-logo-stack" aria-hidden="true">
+            <img src="assets/header/net-banner.png" alt="" class="footer-logo-base">
+            <span class="footer-logo-overlay"></span>
+          </span>
+          <span class="footer-logo-text">voxlis.NET</span>
         </div>
         <div class="footer-nav">
           <a href="/" class="footer-nav-link">Contact</a>
@@ -16,23 +20,20 @@
           <div
             class="theme-dropdown"
             id="themeDropdown"
-            data-disabled-title="Themes Disabled"
-            data-disabled-message="Theme switching is disabled for now. Legacy stays locked in."
-            data-disabled-duration="3200"
           >
             <div class="theme-dropdown-selected" id="themeDropdownSelected">
               <div class="theme-color-indicator blue"></div>
               <span>Legacy</span>
               <i class="fas fa-chevron-down"></i>
-</div>
+            </div>
             <div class="theme-dropdown-options" id="themeDropdownOptions">
-              <div class="theme-dropdown-option" data-theme="red">
-                <div class="theme-color-indicator red"></div>
-                <span>Red Theme</span>
-              </div>
               <div class="theme-dropdown-option selected" data-theme="blue">
                 <div class="theme-color-indicator blue"></div>
                 <span>Legacy</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="red">
+                <div class="theme-color-indicator red"></div>
+                <span>Red Theme</span>
               </div>
               <div class="theme-dropdown-option" data-theme="purple">
                 <div class="theme-color-indicator purple"></div>
@@ -46,6 +47,66 @@
                 <div class="theme-color-indicator orange"></div>
                 <span>Orange Theme</span>
               </div>
+              <div class="theme-dropdown-option" data-theme="cyan">
+                <div class="theme-color-indicator cyan"></div>
+                <span>Cyan Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="teal">
+                <div class="theme-color-indicator teal"></div>
+                <span>Teal Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="indigo">
+                <div class="theme-color-indicator indigo"></div>
+                <span>Indigo Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="pink">
+                <div class="theme-color-indicator pink"></div>
+                <span>Pink Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="rose">
+                <div class="theme-color-indicator rose"></div>
+                <span>Rose Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="amber">
+                <div class="theme-color-indicator amber"></div>
+                <span>Amber Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="lime">
+                <div class="theme-color-indicator lime"></div>
+                <span>Lime Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="emerald">
+                <div class="theme-color-indicator emerald"></div>
+                <span>Emerald Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="sky">
+                <div class="theme-color-indicator sky"></div>
+                <span>Sky Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="violet">
+                <div class="theme-color-indicator violet"></div>
+                <span>Violet Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="slate">
+                <div class="theme-color-indicator slate"></div>
+                <span>Slate Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="gold">
+                <div class="theme-color-indicator gold"></div>
+                <span>Gold Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="crimson">
+                <div class="theme-color-indicator crimson"></div>
+                <span>Crimson Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="aqua">
+                <div class="theme-color-indicator aqua"></div>
+                <span>Aqua Theme</span>
+              </div>
+              <div class="theme-dropdown-option" data-theme="magenta">
+                <div class="theme-color-indicator magenta"></div>
+                <span>Magenta Theme</span>
+              </div>
             </div>
           </div>
         </div>
@@ -53,7 +114,11 @@
       <div class="footer-bottom">
         <div class="footer-info">
           <div class="copyright">© 2025 voxlis.NET. All rights reserved.</div>
-          <div class="credits">Redesigned with &#128153; by <span class="designer-credit">voxlis & Richy</span></div>
+          <div class="credits">
+            Redesigned with
+            <span class="footer-heart" aria-hidden="true"></span>
+            by <span class="designer-credit">voxlis & Richy</span>
+          </div>
         </div>
         <div class="footer-status" aria-label="API status">
           <div class="status-item">
