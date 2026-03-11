@@ -289,7 +289,12 @@
       if (!footerMount) return;
 
       await loadInto(footerMount, "src/components/footer/footer.html");
+      const customThemeMount = document.getElementById("customThemeMount");
+      if (customThemeMount) {
+        await loadInto(customThemeMount, "src/components/custom-theme/custom-theme.html");
+      }
       window.initThemeSwitcher?.(document);
+      window.initCustomThemePicker?.(document);
     } catch (error) {
       console.error(error);
     }

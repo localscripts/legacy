@@ -1,5 +1,6 @@
 (() => {
   const TOAST_STACK_ID = "siteToastStack";
+  const TOAST_EXIT_DURATION_MS = 320;
   const activeToasts = new Map();
 
   const ensureToastStack = () => {
@@ -18,19 +19,24 @@
 
   const armToastDismiss = (toast, duration) => {
     window.clearTimeout(toast._dismissTimeoutId);
+    if (!Number.isFinite(duration) || duration <= 0) {
+      toast._dismissTimeoutId = null;
+      return;
+    }
     toast._dismissTimeoutId = window.setTimeout(() => dismissToast(toast), duration);
   };
 
-  const dismissToast = (toast) => {
+  const dismissToast = (toast, source = "default") => {
     if (!toast || toast.dataset.closing === "true") return;
     toast.dataset.closing = "true";
+    toast.dataset.dismissSource = source;
     toast.classList.remove("is-visible");
     toast.classList.add("is-leaving");
     window.clearTimeout(toast._dismissTimeoutId);
     if (toast.dataset.toastKey && activeToasts.get(toast.dataset.toastKey) === toast) {
       activeToasts.delete(toast.dataset.toastKey);
     }
-    window.setTimeout(() => toast.remove(), 220);
+    window.setTimeout(() => toast.remove(), TOAST_EXIT_DURATION_MS);
   };
 
   const showSiteToast = ({
@@ -39,6 +45,9 @@
     message = "",
     duration = 3200,
     icon = "fa-bell",
+    actionLabel = "",
+    onAction = null,
+    clickToAction = false,
   } = {}) => {
     const stack = ensureToastStack();
     const toastKey = getToastKey({ key, title, message, icon });
@@ -53,6 +62,9 @@
 
     const toast = document.createElement("section");
     toast.className = "site-toast";
+    if (clickToAction && typeof onAction === "function") {
+      toast.classList.add("is-clickable");
+    }
     toast.setAttribute("role", "status");
     toast.setAttribute("aria-live", "polite");
     toast.dataset.toastKey = toastKey;
@@ -72,7 +84,22 @@
     titleEl.className = "site-toast-title";
     titleEl.textContent = title;
 
-    head.append(iconWrap, titleEl);
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "site-toast-close";
+    closeButton.setAttribute("aria-label", "Close notification");
+
+    const closeIcon = document.createElement("i");
+    closeIcon.className = "fas fa-xmark";
+    closeButton.appendChild(closeIcon);
+
+    closeButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dismissToast(toast, "close-button");
+    });
+
+    head.append(iconWrap, titleEl, closeButton);
 
     const messageEl = document.createElement("p");
     messageEl.className = "site-toast-message";
@@ -80,14 +107,44 @@
 
     toast.append(head, messageEl);
 
+    if (actionLabel) {
+      const actions = document.createElement("div");
+      actions.className = "site-toast-actions";
+
+      const actionButton = document.createElement("button");
+      actionButton.type = "button";
+      actionButton.className = "site-toast-action";
+      actionButton.textContent = actionLabel;
+      actionButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (typeof onAction === "function") {
+          onAction(toast);
+        }
+        dismissToast(toast, "action");
+      });
+
+      actions.appendChild(actionButton);
+      toast.appendChild(actions);
+    }
+
     activeToasts.set(toastKey, toast);
     stack.appendChild(toast);
     window.requestAnimationFrame(() => {
-      toast.classList.add("is-visible");
+      window.requestAnimationFrame(() => {
+        toast.classList.add("is-visible");
+      });
     });
 
     armToastDismiss(toast, duration);
-    toast.addEventListener("click", () => dismissToast(toast), { once: true });
+    toast.addEventListener("click", () => {
+      if (clickToAction && typeof onAction === "function") {
+        onAction(toast);
+        dismissToast(toast, "action");
+        return;
+      }
+      dismissToast(toast, "toast");
+    }, { once: true });
     toast.addEventListener("mouseenter", () => window.clearTimeout(toast._dismissTimeoutId));
     toast.addEventListener("mouseleave", () => {
       armToastDismiss(toast, 1200);

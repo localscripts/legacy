@@ -1,0 +1,61 @@
+<div class="custom-theme-control" id="customThemeControl">
+  <button
+    class="custom-theme-trigger"
+    id="customThemeTrigger"
+    type="button"
+    aria-label="Set custom hex theme"
+    aria-controls="customThemeModal"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+  >
+    <i class="fas fa-plus" aria-hidden="true"></i>
+  </button>
+
+  <div
+    class="custom-theme-modal"
+    id="customThemeModal"
+    hidden
+  >
+    <div
+      class="custom-theme-popover"
+      id="customThemePopover"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Custom hex theme"
+    >
+      <div class="custom-theme-head">
+        <div class="custom-theme-title">Custom Hex Theme</div>
+        <button class="custom-theme-close" id="customThemeClose" type="button" aria-label="Close custom theme modal">
+          <i class="fas fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="custom-theme-copy">Enter any hex color and apply it to the legacy theme system.</div>
+
+      <label class="custom-theme-field" for="customThemeHexInput">
+        <span class="custom-theme-field-label">Hex Color</span>
+        <input
+          class="custom-theme-input"
+          id="customThemeHexInput"
+          type="text"
+          inputmode="text"
+          maxlength="7"
+          placeholder="#3B82F6"
+          spellcheck="false"
+          autocomplete="off"
+        >
+      </label>
+
+      <div class="custom-theme-preview">
+        <span class="custom-theme-preview-swatch" id="customThemePreview" aria-hidden="true"></span>
+        <span class="custom-theme-preview-value" id="customThemePreviewValue">#3B82F6</span>
+      </div>
+
+      <p class="custom-theme-error" id="customThemeError" hidden></p>
+
+      <div class="custom-theme-actions">
+        <button class="custom-theme-btn" id="customThemeCancel" type="button">Cancel</button>
+        <button class="custom-theme-btn is-primary" id="customThemeApply" type="button">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>

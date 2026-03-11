@@ -280,6 +280,7 @@
   .hero-btn-arr {
     margin-left: 0.22rem;
   }
+
 }
 
 @media (max-width: 430px) {
@@ -304,6 +305,7 @@
   .hero-btn-trustpilot .hero-btn-ico {
     margin-right: 0;
   }
+
 }
 
 @media (max-width: 380px) {
@@ -333,4 +335,5 @@
   .hero-btn-arr {
     margin-left: 0.18rem;
   }
+
 }

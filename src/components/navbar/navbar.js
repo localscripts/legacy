@@ -11,6 +11,8 @@ const isVisible = (el) => {
 const getRect = (el) => (isVisible(el) ? el.getBoundingClientRect() : null);
 
 const initNavbar = () => {
+  const THEME_GLOW_DURATION_MS = 20000;
+  const THEME_GLOW_EXIT_MS = 420;
   const el = {
     hdr: byId("hdr"),
     hdrCntr: qs(".hdr-cntr"),
@@ -26,6 +28,9 @@ const initNavbar = () => {
     mobSearchPanel: byId("mobSearchPanel"),
     mobTopFltrBtn: byId("mobTopFltrBtn"),
     mobQuickSearchBtn: byId("mobQuickSearchBtn"),
+    themeNavTrigger: byId("themeNavTrigger"),
+    mobQuickThemeBtn: byId("mobQuickThemeBtn"),
+    mobThemeBtn: byId("mobThemeBtn"),
     mobQuickFltrBtn: byId("mobQuickFltrBtn"),
     mobFltrBtn: byId("mobFltrBtn"),
     fltrBtn: byId("fltrBtn"),
@@ -40,6 +45,8 @@ const initNavbar = () => {
   const panelOpen = () => Boolean(el.mobSearchPanel && !el.mobSearchPanel.classList.contains("hidden"));
   const setHidden = (node, hidden) => node && node.classList.toggle("hidden", hidden);
   const setExpanded = (node, value) => node && node.setAttribute("aria-expanded", String(Boolean(value)));
+  let themeGlowTimeout = 0;
+  let themeGlowExitTimeout = 0;
 
   const syncHeaderScrolled = () => {
     el.hdr.classList.toggle("scrolled", window.scrollY > 0);
@@ -112,6 +119,63 @@ const initNavbar = () => {
     if (el.mobPanelSrchInp) window.setTimeout(() => el.mobPanelSrchInp.focus(), 50);
   };
 
+  const clearThemeGlow = ({ animate = false } = {}) => {
+    const themeControl = byId("themeDropdownSelected");
+
+    window.clearTimeout(themeGlowTimeout);
+    themeGlowTimeout = 0;
+    window.clearTimeout(themeGlowExitTimeout);
+    themeGlowExitTimeout = 0;
+
+    if (!themeControl) return;
+
+    if (animate && themeControl.classList.contains("is-nav-glow")) {
+      themeControl.classList.remove("is-nav-glow-out");
+      void themeControl.offsetWidth;
+      themeControl.classList.add("is-nav-glow-out");
+      themeGlowExitTimeout = window.setTimeout(() => {
+        themeControl.classList.remove("is-nav-glow", "is-nav-glow-out");
+        themeGlowExitTimeout = 0;
+      }, THEME_GLOW_EXIT_MS);
+      return;
+    }
+
+    themeControl.classList.remove("is-nav-glow", "is-nav-glow-out");
+  };
+
+  const glowThemeControl = () => {
+    const themeControl = byId("themeDropdownSelected");
+    if (!themeControl) return false;
+
+    clearThemeGlow();
+    void themeControl.offsetWidth;
+    themeControl.classList.add("is-nav-glow");
+    themeGlowTimeout = window.setTimeout(() => {
+      clearThemeGlow({ animate: true });
+    }, THEME_GLOW_DURATION_MS);
+
+    return true;
+  };
+
+  const scrollToThemes = () => {
+    if (menuOpen()) closeMenu();
+    if (panelOpen()) closeMobileSearchPanel();
+
+    const scrollTarget = document.querySelector(".site-footer") || byId("footerMount");
+    scrollTarget?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    let attempts = 0;
+    const maxAttempts = 18;
+
+    const syncGlow = () => {
+      attempts += 1;
+      if (glowThemeControl() || attempts >= maxAttempts) return;
+      window.setTimeout(syncGlow, 150);
+    };
+
+    window.setTimeout(syncGlow, 120);
+  };
+
   const syncLayout = () => {
     syncDropdownSearchVisibility();
     if (menuOpen()) syncMenuTop();
@@ -130,6 +194,19 @@ const initNavbar = () => {
     }
     panelOpen() ? closeMobileSearchPanel() : openMobileSearchPanel();
   });
+  [el.themeNavTrigger, el.mobQuickThemeBtn, el.mobThemeBtn].forEach((trigger) => {
+    on(trigger, "click", (event) => {
+      event.preventDefault();
+      scrollToThemes();
+    });
+  });
+  on(document, "click", (event) => {
+    if (event.target.closest(".theme-switcher-controls")) {
+      window.requestAnimationFrame(() => {
+        clearThemeGlow({ animate: true });
+      });
+    }
+  }, true);
   on(el.mobMenu, "click", (event) => event.target === el.mobMenu && closeMenu());
   on(document, "keydown", (event) => {
     if (event.key !== "Escape") return;

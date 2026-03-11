@@ -2,6 +2,19 @@
   margin: 1.25rem 0 2rem;
 }
 
+.cards-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.sts-row {
+  order: 1;
+}
+
+.cards-grid {
+  order: 2;
+}
+
 .sts-row {
   display: flex;
   align-items: center;
@@ -13,17 +26,28 @@
     margin-bottom var(--smooth-duration) var(--smooth-ease);
 }
 
+.sts-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding-left: clamp(0.3rem, 0.9vw, 0.55rem);
+  min-width: 0;
+  flex: 1 1 auto;
+  transition:
+    gap var(--smooth-duration) var(--smooth-ease),
+    padding-left var(--smooth-duration) var(--smooth-ease);
+}
+
 .sts-txt {
   font-size: 0.875rem;
   color: var(--txt-mut);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 10px;
+  min-width: 0;
   transition:
     font-size var(--smooth-duration) var(--smooth-ease),
     gap var(--smooth-duration) var(--smooth-ease),
-    margin-left var(--smooth-duration) var(--smooth-ease),
     min-width var(--smooth-duration) var(--smooth-ease);
 }
 
@@ -55,6 +79,13 @@
     gap var(--smooth-duration) var(--smooth-ease),
     margin-right var(--smooth-duration) var(--smooth-ease),
     font-size var(--smooth-duration) var(--smooth-ease);
+}
+
+.sts-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex: 0 0 auto;
 }
 
 .sts-legend-item {
@@ -708,11 +739,14 @@
   }
 
   .sts-txt {
-    margin-left: 0;
     gap: 0.25rem;
     flex-wrap: nowrap;
     min-width: 0;
     font-size: clamp(0.72rem, 2.6vw, 0.8rem);
+  }
+
+  .sts-main {
+    gap: 0;
   }
 
   .sts-legend {
@@ -721,6 +755,10 @@
     font-size: clamp(0.66rem, 2.25vw, 0.74rem);
     flex-wrap: nowrap;
     flex: 0 0 auto;
+  }
+
+  .sts-controls {
+    gap: 0.4rem;
   }
 
   .sts-legend-item {
@@ -768,6 +806,10 @@
 }
 
 @media (max-width: 420px) {
+  .sts-main {
+    gap: 0;
+  }
+
   .sts-txt {
     font-size: 0.68rem;
     gap: 0.2rem;
@@ -785,6 +827,10 @@
   .sts-legend-swatch {
     width: 0.65rem;
     height: 0.24rem;
+  }
+
+  .sts-controls {
+    gap: 0.28rem;
   }
 
   .cards-grid {

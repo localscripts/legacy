@@ -330,6 +330,7 @@
     border-radius var(--smooth-duration) var(--smooth-ease),
     font-size var(--smooth-duration) var(--smooth-ease),
     color var(--smooth-duration) var(--smooth-ease);
+  cursor: pointer;
 }
 
 .mob-quick-ico.plain:hover {
@@ -524,6 +525,7 @@
   color: rgba(255, 255, 255, 0.92);
   font-weight: 600;
   font-size: 0.92rem;
+  cursor: pointer;
 }
 
 .mob-nav-lnk.has-ico {

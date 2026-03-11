@@ -49,8 +49,38 @@
       chipWraps.forEach(syncRowState);
     };
 
-    window.addEventListener("resize", syncAll);
+    if (root.dataset.cardChipOverflowResizeBound !== "true") {
+      window.addEventListener("resize", syncAll);
+      root.dataset.cardChipOverflowResizeBound = "true";
+    }
+
     requestAnimationFrame(syncAll);
+  };
+
+  const queueFiltersPrompt = (root = document) => {
+    if (root.dataset.filtersPromptState === "scheduled" || root.dataset.filtersPromptState === "shown") return;
+
+    root.dataset.filtersPromptState = "scheduled";
+
+    const openFilters = () => {
+      document.dispatchEvent(new CustomEvent("voxlis:open-mobile-filter"));
+    };
+
+    window.setTimeout(() => {
+      if (root.dataset.filtersPromptState !== "scheduled") return;
+
+      root.dataset.filtersPromptState = "shown";
+      window.showSiteToast?.({
+        key: "filters-prompt",
+        title: "Try filters?",
+        message: "Want to narrow the list a bit faster?",
+        duration: 0,
+        icon: "fa-sliders",
+        actionLabel: "Open filters",
+        onAction: openFilters,
+        clickToAction: true,
+      });
+    }, 10000);
   };
 
   onReady(async () => {
@@ -82,12 +112,18 @@
       if (cardsMount) {
         await loadInto(cardsMount, "src/components/cards/cards.html");
         initCardChipOverflow(cardsMount);
+        queueFiltersPrompt(cardsMount);
       }
 
       const footerMount = document.getElementById("footerMount");
       if (footerMount) {
         await loadInto(footerMount, "src/components/footer/footer.html");
+        const customThemeMount = document.getElementById("customThemeMount");
+        if (customThemeMount) {
+          await loadInto(customThemeMount, "src/components/custom-theme/custom-theme.html");
+        }
         window.initThemeSwitcher?.(document);
+        window.initCustomThemePicker?.(document);
       }
     } catch (error) {
       console.error(error);

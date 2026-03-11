@@ -29,9 +29,9 @@
           <span class="nav-txt">Home</span>
         </a>
 
-        <a href="/discord/" class="nav-lnk" aria-label="Discord" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-discord nav-ico" aria-hidden="true"></i>
-          <span class="nav-txt">Discord</span>
+        <a id="themeNavTrigger" href="#footerMount" class="nav-lnk" aria-label="Themes">
+          <i class="fas fa-palette nav-ico" aria-hidden="true"></i>
+          <span class="nav-txt">Themes</span>
         </a>
 
         <button id="fltrBtn" class="nav-btn grd" aria-label="Filter">
@@ -61,12 +61,9 @@
         <button id="mobQuickSearchBtn" class="mob-quick-ico plain" aria-label="Search" type="button">
           <i class="fas fa-search"></i>
         </button>
-        <a href="/" class="mob-quick-ico plain" aria-label="Home">
-          <i class="fas fa-house"></i>
-        </a>
-        <a href="/discord/" class="mob-quick-ico plain" aria-label="Discord" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-discord"></i>
-        </a>
+        <button id="mobQuickThemeBtn" class="mob-quick-ico plain" aria-label="Themes" type="button">
+          <i class="fas fa-palette"></i>
+        </button>
         <button id="mobQuickFltrBtn" class="mob-quick-ico solid" aria-label="Filter" type="button">
           <i class="fas fa-sliders-h"></i>
         </button>
@@ -122,9 +119,9 @@
       <nav class="mob-nav">
         <a href="/" class="mob-nav-lnk">Home</a>
 
-        <a href="/discord/" class="mob-nav-lnk">
-          Discord
-        </a>
+        <button id="mobThemeBtn" class="mob-nav-lnk has-ico" type="button">
+          <i class="fas fa-palette"></i> Themes
+        </button>
 
         <button id="mobFltrBtn" class="mob-nav-lnk has-ico">
           <i class="fas fa-sliders-h"></i> Filter

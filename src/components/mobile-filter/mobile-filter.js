@@ -107,6 +107,11 @@
         return;
       }
 
+      if (target.closest("#closeFltrDrwr")) {
+        closeDrawer();
+        return;
+      }
+
       if (target.closest("#applyFltrs")) {
         closeDrawer();
         return;
