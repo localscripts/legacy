@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="../">
+<title>voxlis Overview</title>
+
+<link rel="stylesheet" href="global.css">
+<link rel="stylesheet" href="src/components/navbar/navbar.css">
+<link rel="stylesheet" href="src/components/filter/filter.css">
+<link rel="stylesheet" href="src/components/layout/layout.css">
+<link rel="stylesheet" href="src/components/promo/promo.css">
+<link rel="stylesheet" href="src/components/featured/featured.css">
+<link rel="stylesheet" href="src/components/footer/footer.css">
+<link rel="stylesheet" href="src/components/custom-theme/custom-theme.css">
+<link rel="stylesheet" href="src/shared/site-toast.css">
+<link rel="stylesheet" href="overview/overview.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div id="navbarMount"></div>
+<div id="filterMount"></div>
+
+<main class="cntr main-lyt overview-main-lyt">
+  <aside class="layout-left" aria-label="Left featured ads">
+    <div id="featuredMountLeft"></div>
+    <div id="featuredMountLeftSecondary"></div>
+  </aside>
+
+  <section class="layout-center">
+    <div id="promoMount"></div>
+    <div class="overview-page">
+      <a href="./" class="overview-back">
+        <i class="fas fa-arrow-left"></i>
+        Back to all exploits
+      </a>
+
+      <section class="overview-hero overview-card">
+        <div class="overview-hero-media">
+          <div class="overview-logo-frame">
+            <img src="assets/ads/voxlis_small.png" alt="Overview preview" class="overview-logo-img">
+          </div>
+        </div>
+
+        <div class="overview-hero-copy">
+          <div class="overview-heading-row">
+            <div>
+              <div class="overview-title-row">
+                <h1 id="overviewTitle" class="overview-title">Volt</h1>
+                <span class="overview-status overview-status-warn">Not Updated</span>
+              </div>
+              <p id="overviewSubtitle" class="overview-subtitle">Loaded from <code>volt.md</code></p>
+            </div>
+          </div>
+
+          <div class="overview-badges">
+            <span class="overview-badge">11.11.0</span>
+            <span class="overview-badge">Windows</span>
+            <span class="overview-badge overview-badge-price">$5.99 Weekly</span>
+          </div>
+
+          <div class="overview-actions">
+            <a href="#" class="overview-action-btn">
+              <i class="fas fa-globe"></i>
+              Website
+            </a>
+            <a href="/discord/" class="overview-action-btn" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-discord"></i>
+              Discord
+            </a>
+            <a href="#" class="overview-action-btn overview-action-btn-primary">
+              <i class="fas fa-cart-shopping"></i>
+              Purchase
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="overview-grid">
+        <div class="overview-main-col">
+          <div id="overviewSections" class="overview-sections">
+            <article class="overview-section overview-card">
+              <h2 class="overview-section-title">Overview</h2>
+              <div class="overview-richtext overview-markdown">
+                <p>Loading placeholder content from <code>volt.md</code>...</p>
+              </div>
+            </article>
+          </div>
+
+          <article class="overview-section overview-card overview-note-card">
+            <div class="overview-note-label">Note</div>
+            <p>
+              This page is wired to render <code>volt.md</code> as its placeholder body content so you can replace the
+              hardcoded sample text with a single source file.
+            </p>
+          </article>
+
+          <article class="overview-section overview-card">
+            <div class="overview-section-head">
+              <h2 class="overview-section-title">Screenshots</h2>
+              <span class="overview-section-meta">Preview gallery</span>
+            </div>
+
+            <div class="overview-shot-grid">
+              <div class="overview-shot-card">
+                <img src="assets/ads/blue_voxlis_big.png" alt="Overview screenshot placeholder">
+              </div>
+              <div class="overview-shot-card">
+                <img src="assets/header.png" alt="Overview screenshot placeholder">
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="overview-side-col">
+          <article class="overview-card overview-side-card">
+            <div class="overview-side-title">On This Page</div>
+            <div id="overviewSectionNav" class="overview-section-nav">
+              <span class="overview-section-nav-empty">Sections will appear here once markdown loads.</span>
+            </div>
+          </article>
+
+          <article class="overview-card overview-side-card">
+            <div class="overview-side-title">Quick Summary</div>
+            <ul class="overview-summary-list">
+              <li class="good">Has a reputable past</li>
+              <li class="warn">Quite new - expect issues &amp; crashes</li>
+            </ul>
+          </article>
+
+          <article class="overview-card overview-side-card">
+            <div class="overview-side-title">Features</div>
+            <div class="overview-chip-row">
+              <span class="overview-chip"><i class="fas fa-code"></i> Decompiler</span>
+              <span class="overview-chip"><i class="fas fa-layer-group"></i> Multi-instance</span>
+              <span class="overview-chip"><i class="fas fa-shield-halved"></i> Hyperion Ready</span>
+            </div>
+          </article>
+
+          <article class="overview-card overview-side-card">
+            <div class="overview-price-head">
+              <div class="overview-side-title">Pricing Options</div>
+              <div class="overview-price-meta">Cheapest: <strong>$4.99 USD</strong> &bull; 7 days</div>
+            </div>
+
+            <div class="overview-platform-pill">Windows</div>
+
+            <div class="overview-price-list">
+              <div class="overview-price-row">
+                <span>7 days</span>
+                <strong>$4.99 USD</strong>
+              </div>
+              <div class="overview-price-row">
+                <span>30 days</span>
+                <strong>$17.99 USD</strong>
+              </div>
+              <div class="overview-price-row">
+                <span>90 days</span>
+                <strong>$44.99 USD</strong>
+              </div>
+            </div>
+
+            <p class="overview-price-note">Showing Windows pricing. Other platforms can have different SKU options.</p>
+
+            <div class="overview-buy-row">
+              <a href="#" class="overview-buy-btn">
+                <i class="fas fa-link"></i>
+                Buy on Key-Empire
+              </a>
+              <button class="overview-icon-btn" type="button" aria-label="Open external pricing source">
+                <i class="fas fa-globe"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="overview-card overview-side-card">
+            <div class="overview-side-title">People Also Download</div>
+            <div class="overview-related-list">
+              <a href="#" class="overview-related-card">
+                <div class="overview-related-thumb"></div>
+                <div>
+                  <div class="overview-related-name">Serotonin</div>
+                  <div class="overview-related-meta">fope, Auti</div>
+                </div>
+              </a>
+              <a href="#" class="overview-related-card">
+                <div class="overview-related-thumb overview-related-thumb-alt"></div>
+                <div>
+                  <div class="overview-related-name">Hydrogen</div>
+                  <div class="overview-related-meta">xgladius</div>
+                </div>
+              </a>
+            </div>
+          </article>
+        </aside>
+      </section>
+    </div>
+  </section>
+
+  <aside class="layout-right" aria-label="Featured ads">
+    <div id="featuredMount"></div>
+    <div id="featuredMountSecondary"></div>
+  </aside>
+</main>
+
+<div id="footerMount"></div>
+
+<script src="src/components/navbar/navbar.js"></script>
+<script src="src/components/filter/filter.js"></script>
+<script src="src/components/featured/featured.js"></script>
+<script src="src/components/footer/footer.js"></script>
+<script src="src/components/custom-theme/custom-theme.js"></script>
+<script src="src/shared/site-toast.js"></script>
+<script src="overview/overview.js"></script>
+
+</body>
+</html>
